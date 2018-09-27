@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 调用有参构造函数-->
+    <bean id="someBean" class="com.luting.spring.bean.SomeBean">
+
+        <!--
+           构造函数的参数
+           index:第几个参数，从0开始
+           type:参数类型
+           value:参数值
+       -->
+        <constructor-arg index="0" type="java.lang.String" value="witty"/>
+        <constructor-arg index="1" type="java.lang.Integer" value="18"/>
+    </bean>
+
+    <bean id="file" class="java.io.File">
+        <constructor-arg index="0" type="java.lang.String" value="d:/settings.jar"/>
+    </bean>
+
+    <!--静态工厂创建对象
+        返回的是调用方法的返回值类型
+    -->
+    <bean id="someBean01" class="com.luting.spring.bean.SomeBeanFactory" factory-method="getSomeBean"/>
+    <bean id="someBean02" class="com.luting.spring.bean.SomeBeanFactory" factory-method="getStr"/>
+
+
+    <!--实例工厂创建对象
+        factory-method:实例的方法
+        factory-bean:实例方法所在的bean的id
+        class:实例方法的返回值类型
+    -->
+    <bean id="factory" class="com.luting.spring.bean.SomeBeanFactory"/>
+    <bean id="someBean03" class="com.luting.spring.bean.SomeBean" factory-bean="factory" factory-method="getSomeBeans"/>
+
+
+</beans>

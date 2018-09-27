@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--factoryBean-->
+    <bean id="someBean" class="com.luting.spring.ioc01.SomeBeanFactoryBean"/>
+
+    <!--创建Calendar对象-->
+    <bean id="calendar" class="java.util.Calendar" factory-method="getInstance"/>
+    <!--创建Date对象-->
+    <bean id="date" class="java.util.Date" factory-bean="calendar" factory-method="getTime"/>
+
+    <!--获取java_home-->
+    <bean id="java_home" class="java.lang.System" factory-method="getenv">
+        <constructor-arg type="java.lang.String" value="java_home"></constructor-arg>
+    </bean>
+
+    <!--获取mysql查询结果-->
+    <bean id="driverManager" class="java.sql.DriverManager" factory-method="getConnection">
+        <constructor-arg index="0" type="java.lang.String" value="jdbc:mysql://localhost:3306/socks"/>
+        <constructor-arg index="1" type="java.lang.String" value="root"/>
+        <constructor-arg index="2" type="java.lang.String" value=""/>
+    </bean>
+
+    <bean id="ps" class="java.sql.PreparedStatement" factory-bean="driverManager" factory-method="prepareStatement">
+        <constructor-arg type="java.lang.String" value="select USERNAME from t_user"/>
+    </bean>
+
+    <bean id="rs" class="com.mysql.jdbc.ResultSetImpl" factory-bean="ps" factory-method="executeQuery"/>
+
+
+
+
+
+
+</beans>
