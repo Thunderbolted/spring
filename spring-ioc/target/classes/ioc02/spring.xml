@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--基本类型注入-->
+    <bean id="simpleDataBean" class="com.luting.spring.ioc02.SimpleDataBean">
+        <!--为属性注入值
+                    name:属性名,属性的set方法,通过反射技术setA到SimpleDataBean中去找方法名为setA
+                    value:属性值
+             -->
+        <property name="a" value="1"/>
+        <property name="b" value="2.1"/>
+        <property name="c" value="1.3"/>
+        <property name="d" value="中"/>
+        <property name="e" value="true"/>
+        <property name="f" value="123456"/>
+        <property name="g" value="12"/>
+        <property name="h" value="24"/>
+    </bean>
+
+    <!--String/Class-->
+    <bean id="stringClassBean" class="com.luting.spring.ioc02.StringClassBean">
+        <property name="str" value="三三"/>
+        <!--为class类型的属性注入值：value写:包名.类名-->
+        <property name="dateClass" value="java.util.Date"/>
+    </bean>
+
+    <!--resource类型属性注入
+       注入两种路径：
+       绝对路径： file:
+       类加载路径：classpath:
+       -->
+    <bean id="resourceBean" class="com.luting.spring.ioc02.ResourceBean">
+        <property name="fileResource">
+            <!-- 绝对路径： file:-->
+            <value>file:E:/qt/JDBCTest1.java</value>
+        </property>
+
+        <!--类加载路径：classpath:-->
+        <property name="pathResource">
+            <value>classpath:ioc02/spring.xml</value>
+        </property>
+
+    </bean>
+
+    <!--集合属性的注入-->
+    <bean id="arrayBean" class="com.luting.spring.ioc02.ArrayBean">
+        <property name="arr">
+            <array>
+                <value>hello</value>
+                <value>world</value>
+
+            </array>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>list1</value>
+                <value>list2</value>
+
+            </list>
+
+        </property>
+        <property name="set">
+            <set>
+                <value>123</value>
+                <value>123</value>
+            </set>
+
+        </property>
+
+        <property name="props">
+            <props>
+                <prop key="abc">hello</prop>
+                <prop key="def">world</prop>
+            </props>
+
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="k1" value="v1"></entry>
+                <entry key="k2" value="v2"></entry>
+                <entry key="k3" value="v3"></entry>
+
+            </map>
+
+        </property>
+
+    </bean>
+
+
+</beans>
